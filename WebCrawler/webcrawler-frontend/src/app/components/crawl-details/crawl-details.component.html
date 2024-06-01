@@ -1,0 +1,31 @@
+
+@if(!!websiteForm) {
+    <form id="website-detail-form" [formGroup]="websiteForm">
+        <div>
+          <label for="url">URL:</label>
+          <input id="url" type="text" formControlName="url">
+        </div>
+      
+        <div>
+          <label for="label">Label:</label>
+          <input id="label" type="text" formControlName="label">
+        </div>
+      
+        <div>
+          <label for="isActive">Is Active:</label>
+          <input id="isActive" type="checkbox" formControlName="isActive">
+        </div>
+      
+        <div>
+          <label for="boundaryRegExp">Boundary RegExp:</label>
+          <input id="boundaryRegExp" type="text" formControlName="boundaryRegExp">
+        </div>
+      
+        <div>
+          <label for="periodicity">Periodicity:</label>
+          <input id="periodicity" type="number" formControlName="periodicity">
+        </div>
+    
+        <button class="btn btn-primary" (click)="onSave()">Save</button>
+      </form>
+}

@@ -1,0 +1,42 @@
+
+@if (!!websitesCurrentPage){
+    <h1>Crawl list</h1>
+
+    <input type="text" placeholder="Label" [(ngModel)]="searchParams.label">
+    <input type="text" placeholder="URL" [(ngModel)]="searchParams.url">
+
+    <button class="btn btn-primary" (click)="onSearch()">Search</button>
+
+    <table id="crawl-list" class="table table-striped">
+        <thead>
+          <tr>
+            <th scope="col">Label</th>
+            <th scope="col">URL</th>
+            <th scope="col">Is active</th>
+            <th scope="col">Execution date</th>
+            <th scope="col">Status</th>
+            <!-- <th scope="col">Actions</th> -->
+          </tr>
+        </thead>
+        <tbody>
+            @for (crawl of websitesCurrentPage.data; track crawl.label){
+                <tr>
+                    <td><a routerLink="/crawl-details/{{crawl.siteId}}">{{crawl.label}}</a></td>
+                    <td>{{crawl.url}}</td>
+                    <td>{{crawl.isActive}}</td>
+                    <td>{{crawl.date}}</td>
+                    <td>{{crawl.state}}</td>
+                    <!-- <td>
+                        <button class="btn btn-primary" (click)="crawlDetails(crawl.id)">Details</button>
+                        <button class="btn btn-danger" (click)="deleteCrawl(crawl.id)">Delete</button>
+                    </td> -->
+                </tr>
+            }
+        </tbody>
+      </table>
+
+      <app-paginator
+        [currentPageInput]="websitesCurrentPage.pageNumber"
+        [totalPagesInput]="websitesCurrentPage.totalPages"
+        (onPageChange)="onPageChange($event)"> </app-paginator>
+}
