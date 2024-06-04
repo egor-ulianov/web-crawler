@@ -37,4 +37,34 @@
         background-color: #0056b3;
       }
     }
+
+    h1 {
+      text-align: center;
+      margin-bottom: 20px;
+    }
+    
+    input[type="text"] {
+      margin-bottom: 10px;
+      padding: 5px;
+      border: 1px solid #ccc;
+      border-radius: 4px;
+    }
+    
+    .btn {
+      margin-bottom: 20px;
+    }
+    
+    #crawl-list {
+      th {
+        text-align: left;
+      }
+    
+      td, th {
+        padding: 10px;
+      }
+    
+      .btn {
+        margin-right: 10px;
+      }
+    }
   }

@@ -28,4 +28,49 @@
     
         <button class="btn btn-primary" (click)="onSave()">Save</button>
       </form>
+
+
+      @if (!!websitesExecutionsCurrentPage){
+        <h1>Crawl executions list</h1>
+    
+        @if (!!websitesExecutionsCurrentPage.data && websitesExecutionsCurrentPage.data.length == 0){
+            <p>No results found</p>
+        }
+    
+        @if(!!websitesExecutionsCurrentPage.data && websitesExecutionsCurrentPage.data.length > 0){
+            <table id="crawl-list" class="table table-striped">
+                <thead>
+                  <tr>
+                    <th scope="col">Label</th>
+                    <th scope="col">Start time</th>
+                    <th scope="col">Finish time</th>
+                    <th scope="col">State</th>
+                    <th scope="col">Number of crawled pages</th>
+                    <!-- <th scope="col">Actions</th> -->
+                  </tr>
+                </thead>
+                <tbody>
+                    @for (execution of websitesExecutionsCurrentPage.data; track execution.id){
+                        <tr>
+                            <td><a routerLink="/crawl-details/{{execution.websiteRecordId}}">{{execution.websiteRecord.label}}</a></td>
+                            <td>{{execution.date}}</td>
+                            <td>{{execution.finishedDate}}</td>
+                            <td>{{execution.state}}</td>
+                            <td>{{execution.numberOfCrawledPages}}</td>
+                            <!-- <td>
+                                <button class="btn btn-primary" (click)="crawlDetails(crawl.id)">Details</button>
+                                <button class="btn btn-danger" (click)="deleteCrawl(crawl.id)">Delete</button>
+                            </td> -->
+                        </tr>
+                    }
+                </tbody>
+              </table>
+        
+              <app-paginator
+                [currentPageInput]="websitesExecutionsCurrentPage.pageNumber"
+                [totalPagesInput]="websitesExecutionsCurrentPage.totalPages"
+                (onPageChange)="onPageChange($event)"> </app-paginator>
+        }
+    }
+
 }
