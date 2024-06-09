@@ -20,7 +20,7 @@ export class ExecutionsService {
   }
 
   public getPagedExecutions(searchParams: WebSitesExecutionsPagedRequest): Observable<PagedResponse<WebsiteCrawlExecutionPlan>> {
-    let httpQueryParams: HttpParams = HttpParamsConverter.convert(searchParams);
+    const httpQueryParams: HttpParams = HttpParamsConverter.convert(searchParams);
 
     return this.http.get<PagedResponse<WebsiteCrawlExecutionPlan>>(this.apiUrl, { params: httpQueryParams });
   }

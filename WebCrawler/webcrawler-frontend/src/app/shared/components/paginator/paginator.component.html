@@ -1,22 +1,15 @@
-@if(!isToFirstPageDisabled) {
-    <button (click)="onFirstPage()">
+<div class="pagination">
+    <button (click)="onFirstPage()" [disabled]="isToFirstPageDisabled">
         <span aria-hidden="true">&laquo;</span>
     </button>
-
-}
-@if(!isPreviousPageDisabled) {
-    <button (click)="onPreviousPage()">
+    <button (click)="onPreviousPage()" [disabled]="isPreviousPageDisabled">
         <span aria-hidden="true">&lsaquo;</span>
     </button>
-}
-{{currentPage}} / {{totalPages}}
-@if(!isNextPageDisabled) {
-    <button (click)="onNextPage()">
+    <span class="page-info">{{currentPage}} / {{totalPages}}</span>
+    <button (click)="onNextPage()" [disabled]="isNextPageDisabled">
         <span aria-hidden="true">&rsaquo;</span>
     </button>
-}
-@if(!isToLastPageDisabled) {
-    <button (click)="onLastPage()">
+    <button (click)="onLastPage()" [disabled]="isToLastPageDisabled">
         <span aria-hidden="true">&raquo;</span>
     </button>
-}
+</div>

@@ -2,7 +2,7 @@ import { WebsiteRecord } from "../website-record/website-record";
 
 export class WebsiteCrawlExecutionPlan 
 {
-    public id: number;
+    public id: number | null;
     public websiteRecordId: number;
     public date: Date;
     public state: 'Pending' | 'Running' | 'Completed' | 'Failed';
@@ -10,7 +10,7 @@ export class WebsiteCrawlExecutionPlan
     public finishedDate: Date | undefined;
     public numberOfCrawledPages: number | undefined;
 
-    constructor(id: number, 
+    constructor(id: number | null, 
         websiteRecordId: number, 
         date: Date, state: 'Pending' | 'Running' | 'Completed' | 'Failed', 
         websiteRecord: WebsiteRecord,

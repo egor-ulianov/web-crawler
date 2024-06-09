@@ -1,4 +1,4 @@
-import { Component } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 import { WebsiteCrawlExecutionPlan } from '../../shared/models/website-crawl-execution-plan/website-crawl-execution-plan';
 import { PagedResponse } from '../../shared/models/response-models/paged-response/paged-response';
 import { WebSitesExecutionsPagedRequest } from '../../shared/models/request-models/web-sites-executions-paged-request/web-sites-executions-paged-request';
@@ -6,15 +6,16 @@ import { ExecutionsService } from '../../shared/services/executions.service';
 import { PaginatorComponent } from '../../shared/components/paginator/paginator.component';
 import { FormsModule } from '@angular/forms';
 import { RouterLink } from '@angular/router';
+import { CommonModule } from '@angular/common';
 
 @Component({
   selector: 'app-crawl-executions-list',
   standalone: true,
-  imports: [PaginatorComponent, FormsModule, RouterLink],
+  imports: [PaginatorComponent, FormsModule, RouterLink, CommonModule],
   templateUrl: './crawl-executions-list.component.html',
   styleUrl: './crawl-executions-list.component.scss'
 })
-export class CrawlExecutionsListComponent {
+export class CrawlExecutionsListComponent implements OnInit{
   //#region Properties
 
   public websitesExecutionsCurrentPage: PagedResponse<WebsiteCrawlExecutionPlan> | undefined;

@@ -1,0 +1,9 @@
+<div>
+    <input [(ngModel)]="inputValue" (keyup.enter)="addTag()">
+    @for(tag of tags; track tag.id) {
+        <div>
+            {{tag.name}}
+            <button (click)="removeTag(tag)">X</button>
+        </div>
+    }
+</div>

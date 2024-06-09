@@ -1,0 +1,53 @@
+$primary-color: #007bff;
+$secondary-color: #6c757d;
+$error-color: #dc3545;
+$background-color: #f8f9fa;
+$font-family-base: 'Helvetica Neue', Helvetica, Arial, sans-serif;
+$tag-bg: #e9ecef;
+$tag-border: #ced4da;
+$tag-color: #495057;
+$tag-remove-bg: $error-color;
+$tag-remove-color: #ffffff;
+
+
+div {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+}
+
+input {
+  flex: 1;
+  padding: 10px;
+  margin: 10px 5px 10px 0;
+  border: 1px solid $secondary-color;
+  border-radius: 4px;
+  font-size: 1rem;
+}
+
+div > div {
+  display: flex;
+  align-items: center;
+  background-color: $tag-bg;
+  border: 1px solid $tag-border;
+  border-radius: 4px;
+  padding: 5px 10px;
+  margin: 5px;
+  color: $tag-color;
+  font-size: 1rem;
+
+  button {
+    background-color: $tag-remove-bg;
+    border: none;
+    color: $tag-remove-color;
+    margin-left: 10px;
+    padding: 5px;
+    border-radius: 4px;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+
+    &:hover {
+      background-color: darken($tag-remove-bg, 10%);
+    }
+  }
+}

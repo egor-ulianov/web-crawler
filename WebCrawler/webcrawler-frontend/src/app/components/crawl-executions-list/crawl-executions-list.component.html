@@ -2,7 +2,7 @@
 @if (!!websitesExecutionsCurrentPage){
     <h1>Crawl executions list</h1>
 
-    @if (!!websitesExecutionsCurrentPage.data && websitesExecutionsCurrentPage.data.length == 0){
+    @if (!!websitesExecutionsCurrentPage.data && websitesExecutionsCurrentPage.data.length === 0){
         <p>No results found</p>
     }
 
@@ -22,8 +22,8 @@
                 @for (execution of websitesExecutionsCurrentPage.data; track execution.id){
                     <tr>
                         <td><a routerLink="/crawl-details/{{execution.websiteRecordId}}">{{execution.websiteRecord.label}}</a></td>
-                        <td>{{execution.date}}</td>
-                        <td>{{execution.finishedDate}}</td>
+                        <td>{{execution.date | date:'medium'}}</td>
+                        <td>{{execution.finishedDate | date:'medium'}}</td>
                         <td>{{execution.state}}</td>
                         <td>{{execution.numberOfCrawledPages}}</td>
                         <!-- <td>
@@ -38,6 +38,6 @@
           <app-paginator
             [currentPageInput]="websitesExecutionsCurrentPage.pageNumber"
             [totalPagesInput]="websitesExecutionsCurrentPage.totalPages"
-            (onPageChange)="onPageChange($event)"> </app-paginator>
+            (pageChange)="onPageChange($event)"> </app-paginator>
     }
 }

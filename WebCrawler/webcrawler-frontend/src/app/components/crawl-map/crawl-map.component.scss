@@ -1,0 +1,65 @@
+$primary-color: #007bff;
+$secondary-color: #6c757d;
+$background-color: #f8f9fa;
+$font-family-base: 'Helvetica Neue', Helvetica, Arial, sans-serif;
+$button-bg: #ffffff;
+$button-border: #ced4da;
+$button-color: $secondary-color;
+$button-hover-bg: $primary-color;
+$button-hover-color: #ffffff;
+$disabled-button-bg: #e9ecef;
+$disabled-button-color: #6c757d;
+$node-default-color: #afafaf;
+
+.chart-container {
+  width: 100%;
+  height: auto;
+  margin: 20px 0;
+}
+
+.node {
+  cursor: pointer;
+
+  rect {
+    stroke: $secondary-color;
+    stroke-width: 1px;
+  }
+
+  text {
+    fill: #000;
+    font-size: 0.875rem;
+  }
+}
+
+button {
+  background-color: $button-bg;
+  border: 1px solid $button-border;
+  color: $button-color;
+  padding: 10px 20px;
+  font-size: 1rem;
+  border-radius: 4px;
+  cursor: pointer;
+  margin: 5px 10px 5px 0;
+  transition: background-color 0.3s ease, color 0.3s ease;
+
+  &:hover {
+    background-color: $button-hover-bg;
+    color: $button-hover-color;
+  }
+
+  &:disabled {
+    background-color: $disabled-button-bg;
+    color: $disabled-button-color;
+    cursor: not-allowed;
+  }
+}
+
+.button-container {
+  display: flex;
+  align-items: center;
+  margin: 20px 0;
+
+  button {
+    margin-right: 10px;
+  }
+}

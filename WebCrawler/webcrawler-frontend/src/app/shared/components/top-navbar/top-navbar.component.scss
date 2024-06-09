@@ -1,31 +1,62 @@
-#top-navbar {
-    position: fixed;
-    top: 0;
-    width: 100%;
-    background-color: #f8f9fa;
-    border-bottom: 1px solid #dee2e6;
-    z-index: 1000;
-  
-    .container {
-      .row {
-        .col-12 {
-          .nav {
-            list-style-type: none;  
-            display: flex;
-  
-            .nav-item {
-              .nav-link {
-                color: #495057;
-                padding: 10px 15px;
-                transition: color 0.3s ease;
-  
-                &:hover {
-                  color: #007bff;
-                }
-              }
-            }
-          }
+$primary-color: #007bff;
+$secondary-color: #6c757d;
+$background-color: #f8f9fa;
+$font-family-base: 'Helvetica Neue', Helvetica, Arial, sans-serif;
+$navbar-bg: #343a40;
+$navbar-link-color: #ffffff;
+$navbar-link-hover-bg: rgba(255, 255, 255, 0.1);
+$navbar-title-color: #ffffff;
+
+// Navbar styles
+nav#top-navbar {
+  position: fixed;
+  top: 0;
+  width: 100%;
+  background-color: $navbar-bg;
+  padding: 10px 0;
+  z-index: 1000;
+
+  .container {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+  }
+
+  .nav-title {
+    font-size: 1.5rem;
+    color: $navbar-title-color;
+    font-weight: bold;
+  }
+
+  .nav {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+    display: flex;
+
+    .nav-item {
+      margin-left: 20px;
+
+      .nav-link {
+        color: $navbar-link-color;
+        text-decoration: none;
+        padding: 10px 15px;
+        transition: background-color 0.3s ease;
+
+        &:hover {
+          background-color: $navbar-link-hover-bg;
         }
       }
     }
   }
+}
+
+// General styles to accommodate fixed navbar
+body {
+  font-family: $font-family-base;
+  background-color: $background-color;
+  color: $secondary-color;
+  margin: 0;
+  padding: 20px;
+  padding-top: 60px; // Adjust this value if needed based on the height of the navbar
+}

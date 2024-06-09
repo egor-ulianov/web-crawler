@@ -1,0 +1,49 @@
+$primary-color: #007bff;
+$secondary-color: #6c757d;
+$background-color: #f8f9fa;
+$font-family-base: 'Helvetica Neue', Helvetica, Arial, sans-serif;
+$button-bg: #ffffff;
+$button-border: #ced4da;
+$button-color: $secondary-color;
+$button-hover-bg: $primary-color;
+$button-hover-color: #ffffff;
+$disabled-button-bg: #e9ecef;
+$disabled-button-color: #6c757d;
+
+.pagination {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin: 20px 0;
+
+  button {
+    background-color: $button-bg;
+    border: 1px solid $button-border;
+    color: $button-color;
+    padding: 5px 10px;
+    margin: 0 5px;
+    border-radius: 4px;
+    cursor: pointer;
+    transition: background-color 0.3s ease, color 0.3s ease;
+
+    &:hover {
+      background-color: $button-hover-bg;
+      color: $button-hover-color;
+    }
+
+    &:disabled {
+      background-color: $disabled-button-bg;
+      color: $disabled-button-color;
+      cursor: not-allowed;
+    }
+
+    span {
+      font-size: 1.2rem;
+    }
+  }
+
+  .page-info {
+    margin: 0 10px;
+    font-size: 1rem;
+  }
+}

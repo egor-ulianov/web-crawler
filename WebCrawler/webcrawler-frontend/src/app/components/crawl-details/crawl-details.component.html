@@ -1,39 +1,88 @@
 
-@if(!!websiteForm) {
-    <form id="website-detail-form" [formGroup]="websiteForm">
-        <div>
-          <label for="url">URL:</label>
-          <input id="url" type="text" formControlName="url">
-        </div>
+@if(!!websiteForm && !!websiteForm.controls) {
+    <form id="website-detail-form" [formGroup]="websiteForm" (keydown.enter)="$event.preventDefault()">
+      <div>
+        <label for="url">URL:</label>
+        <input id="url" type="text" formControlName="url">
+      </div>
+      @if(!!websiteForm.controls['url'].invalid && !!websiteForm.controls['url'].touched && !!websiteForm.controls['url'].errors){
+        @if(!!websiteForm.controls['url'].errors['required']){
+          <small class="form-text text-danger">
+            URL is required.
+          </small>
+        }
+        @if(!!websiteForm.controls['url'].errors['pattern']){
+          <small class="form-text text-danger">
+            URL must start with http:// or https://.
+          </small>
+        }
+      }
       
-        <div>
-          <label for="label">Label:</label>
-          <input id="label" type="text" formControlName="label">
-        </div>
+      <div>
+        <label for="label">Label:</label>
+        <input id="label" type="text" formControlName="label">
+      </div>
+      @if(!!websiteForm.controls['label'].invalid && !!websiteForm.controls['label'].touched && !!websiteForm.controls['label'].errors){
+        @if(!!websiteForm.controls['label'].errors['required']){
+          <small class="form-text text-danger">
+            Label is required.
+          </small>
+        }
+      }
       
-        <div>
-          <label for="isActive">Is Active:</label>
-          <input id="isActive" type="checkbox" formControlName="isActive">
-        </div>
+      <div>
+        <label for="isActive">Is Active:</label>
+        <input id="isActive" type="checkbox" formControlName="isActive">
+      </div>
       
-        <div>
-          <label for="boundaryRegExp">Boundary RegExp:</label>
-          <input id="boundaryRegExp" type="text" formControlName="boundaryRegExp">
-        </div>
+      <div>
+        <label for="boundaryRegExp">Boundary RegExp:</label>
+        <input id="boundaryRegExp" type="text" formControlName="boundaryRegExp">
+      </div>
+      @if(!!websiteForm.controls['boundaryRegExp'].invalid && !!websiteForm.controls['boundaryRegExp'].touched && !!websiteForm.controls['boundaryRegExp'].errors){
+        @if(!!websiteForm.controls['boundaryRegExp'].errors['invalidRegExp']){
+          <small class="form-text text-danger">
+            Boundary RegExp is not valid.
+          </small>
+        }
+      }
       
-        <div>
-          <label for="periodicity">Periodicity:</label>
-          <input id="periodicity" type="number" formControlName="periodicity">
-        </div>
+      <div>
+        <label for="periodicity">Periodicity:</label>
+        <input id="periodicity" type="number" formControlName="periodicity">
+      </div>
+      @if(!!websiteForm.controls['periodicity'].invalid && !!websiteForm.controls['periodicity'].touched && !!websiteForm.controls['periodicity'].errors){
+        @if(!!websiteForm.controls['periodicity'].errors['required']){
+          <small class="form-text text-danger">
+            Periodicity is required.
+          </small>
+        }
+        @if(!!websiteForm.controls['periodicity'].errors['min']){
+          <small class="form-text text-danger">
+            Periodicity must be a number.
+          </small>
+        }
+      }
+
+        @if(!!data){
+            <div>
+                <label for="tags">Tags:</label>
+                <app-tags-assigner [tags]="data.tags" (tagsChanged)="onTagsChanged($event)"></app-tags-assigner>
+            </div>
+        }
     
         <button class="btn btn-primary" (click)="onSave()">Save</button>
+        @if(!!id) {
+          <button class="btn btn-danger" (click)="onStartCrawl()">Start crawl now</button>
+          <button class="btn btn-danger" (click)="onDelete()">Delete</button>
+        }
       </form>
 
 
       @if (!!websitesExecutionsCurrentPage){
         <h1>Crawl executions list</h1>
     
-        @if (!!websitesExecutionsCurrentPage.data && websitesExecutionsCurrentPage.data.length == 0){
+        @if (!!websitesExecutionsCurrentPage.data && websitesExecutionsCurrentPage.data.length === 0){
             <p>No results found</p>
         }
     
@@ -53,8 +102,8 @@
                     @for (execution of websitesExecutionsCurrentPage.data; track execution.id){
                         <tr>
                             <td><a routerLink="/crawl-details/{{execution.websiteRecordId}}">{{execution.websiteRecord.label}}</a></td>
-                            <td>{{execution.date}}</td>
-                            <td>{{execution.finishedDate}}</td>
+                            <td>{{execution.date | date:'medium'}}</td>
+                            <td>{{execution.finishedDate | date:'medium'}}</td>
                             <td>{{execution.state}}</td>
                             <td>{{execution.numberOfCrawledPages}}</td>
                             <!-- <td>
@@ -69,7 +118,7 @@
               <app-paginator
                 [currentPageInput]="websitesExecutionsCurrentPage.pageNumber"
                 [totalPagesInput]="websitesExecutionsCurrentPage.totalPages"
-                (onPageChange)="onPageChange($event)"> </app-paginator>
+                (pageChange)="onPageChange($event)"> </app-paginator>
         }
     }
 

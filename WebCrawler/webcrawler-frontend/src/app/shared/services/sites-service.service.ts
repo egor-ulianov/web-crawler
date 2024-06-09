@@ -13,14 +13,18 @@ import { HttpParamsConverter } from '../helpers/http-params-converter.helper';
 export class SitesService {
   private readonly apiUrl: string = '/api/sites';
 
-  constructor(private http: HttpClient) { }
+  public selectedWebsiteIds: number[];
+
+  constructor(private http: HttpClient) {
+    this.selectedWebsiteIds = [];
+  }
 
   public createWebsite(website: WebsiteRecord): Observable<WebsiteRecord> {
     return this.http.post<WebsiteRecord>(this.apiUrl, website);
   }
 
   public updateWebsite(website: WebsiteRecord): Observable<WebsiteRecord> {
-    return this.http.patch<WebsiteRecord>(`${this.apiUrl}/${website.id}`, website);
+    return this.http.patch<WebsiteRecord>(`${this.apiUrl}`, website);
   }
 
   public deleteWebsite(websiteId: string): Observable<string> {
@@ -32,7 +36,7 @@ export class SitesService {
   }
 
   public getPagedWebsites(searchParams: WebSitesPagedRequest): Observable<PagedResponse<WebsiteShortRepresentation>> {
-    let httpQueryParams: HttpParams = HttpParamsConverter.convert(searchParams);
+    const httpQueryParams: HttpParams = HttpParamsConverter.convert(searchParams);
 
     return this.http.get<PagedResponse<WebsiteShortRepresentation>>(this.apiUrl, { params: httpQueryParams });
   }

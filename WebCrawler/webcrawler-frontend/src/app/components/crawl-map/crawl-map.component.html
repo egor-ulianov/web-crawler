@@ -1,31 +1,44 @@
-<ngx-graph
-  class="chart-container"
-  [view]="[500, 200]"
-  [links]="[
-    {
-      id: 'a',
-      source: 'first',
-    target: 'second',
-      label: 'is parent of'
-    }, {
-      id: 'b',
-      source: 'first',
-      target: 'third',
-      label: 'custom label'
+@if(nodes.length > 0){
+  <ngx-graph
+    class="chart-container"
+    [view]="graphSize"
+    [links]="links"
+    [nodes]="nodes"
+  >
+    <ng-template #nodeTemplate let-node>
+      <svg:g class="node" (dblclick)="onNodeSelect(node)">
+          <svg:rect
+          [attr.width]="node.dimension.width"
+          [attr.height]="node.dimension.height"
+          [attr.fill]="node.data.startingNodeId ? node.data.color : '#afafaf'"
+          />
+          <svg:text alignment-baseline="central" [attr.x]="10" [attr.y]="node.dimension.height / 2">
+            {{node.label}}
+          </svg:text>
+      </svg:g>
+    </ng-template>
+  </ngx-graph>
+
+  <div class="button-container">
+    @if(isFullView){
+      <button (click)="switchToDomainsView()">Switch to domains view</button>
     }
-  ]"
-  [nodes]="[
-    {
-      id: 'first',
-      label: 'A'
-    }, {
-      id: 'second',
-      label: 'B'
-    }, {
-      id: 'third',
-      label: 'C'
+  
+    @if(isDomainsView){
+      <button (click)="switchToFullView()">Switch to full view</button>
     }
-  ]"
-  (select)="onNodeSelect($event)"
->
-</ngx-graph>
+  
+    @if(isStatic){
+      <button (click)="switchToDynamic()">Dynamic mode</button>
+    }
+  
+    @if(isDynamic){
+      <button (click)="switchToStatic()">Static mode</button>
+    }
+  </div>
+}
+
+
+@if(!nodes || nodes.length === 0){
+  <p>No results found. Please, select some websites in Crawl list.</p>
+}

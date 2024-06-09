@@ -1,4 +1,16 @@
-/* You can add global styles to this file, and also import other style files */
+$primary-color: #007bff;
+$secondary-color: #6c757d;
+$background-color: #f8f9fa;
+$font-family-base: 'Helvetica Neue', Helvetica, Arial, sans-serif;
+$navbar-bg: #343a40;
+$navbar-link-color: #ffffff;
+$navbar-link-hover-bg: rgba(255, 255, 255, 0.1);
+$navbar-title-color: #ffffff;
+
 body {
-    padding-top: 60px;  // Adjust this value based on the height of your navbar
-  }
+  font-family: $font-family-base;
+  background-color: $background-color;
+  color: $secondary-color;
+  margin: 0;
+  padding-top: 60px;
+}

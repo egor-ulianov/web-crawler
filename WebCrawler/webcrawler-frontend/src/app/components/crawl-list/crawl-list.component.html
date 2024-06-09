@@ -5,9 +5,11 @@
     <input type="text" placeholder="Label" [(ngModel)]="searchParams.label">
     <input type="text" placeholder="URL" [(ngModel)]="searchParams.url">
 
+    <app-tags-assigner [tags]="tags" (tagsChanged)="onTagsChanged($event)"></app-tags-assigner>
+
     <button class="btn btn-primary" (click)="onSearch()">Search</button>
 
-    @if (!!websitesCurrentPage.data && websitesCurrentPage.data.length == 0){
+    @if (!!websitesCurrentPage.data && websitesCurrentPage.data.length === 0){
         <p>No results found</p>
     }
 
@@ -16,21 +18,31 @@
         <thead>
           <tr>
             <th scope="col">Label</th>
-            <th scope="col">URL</th>
+            <th scope="col">URL <fa-icon (click)="onOrderBySelected('url')" [icon]="urlIcon('url')"></fa-icon></th>
             <th scope="col">Is active</th>
-            <th scope="col">Execution date</th>
+            <th scope="col">Execution date <fa-icon (click)="onOrderBySelected('date')" [icon]="urlIcon('date')"></fa-icon></th>
+            <th scope="col">Tags</th>
             <th scope="col">Status</th>
+            <th scope="col">Select for map</th>
             <!-- <th scope="col">Actions</th> -->
           </tr>
         </thead>
         <tbody>
-            @for (crawl of websitesCurrentPage.data; track crawl.label){
+            @for (crawl of websitesCurrentPage.data; track crawl.siteId){
                 <tr>
                     <td><a routerLink="/crawl-details/{{crawl.siteId}}">{{crawl.label}}</a></td>
                     <td>{{crawl.url}}</td>
                     <td>{{crawl.isActive}}</td>
-                    <td>{{crawl.date}}</td>
+                    <td>{{crawl.date | date:'medium'}}</td>
+                    <td>
+                        @for (tag of crawl.tags; track tag){
+                            <span class="badge badge-primary" (click)="onTagClick(tag)">{{tag}} </span>
+                        }
+                    </td>
                     <td>{{crawl.state}}</td>
+                    <td>
+                        <input type="checkbox" [checked]="isSelectedForMap(crawl.siteId)" (change)="onSelectForMap(crawl.siteId)">
+                    </td>
                     <!-- <td>
                         <button class="btn btn-primary" (click)="crawlDetails(crawl.id)">Details</button>
                         <button class="btn btn-danger" (click)="deleteCrawl(crawl.id)">Delete</button>
@@ -43,6 +55,6 @@
       <app-paginator
         [currentPageInput]="websitesCurrentPage.pageNumber"
         [totalPagesInput]="websitesCurrentPage.totalPages"
-        (onPageChange)="onPageChange($event)"> </app-paginator>
+        (pageChange)="onPageChange($event)"> </app-paginator>
     }
 }

@@ -1,11 +1,9 @@
 import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
-import { PagedResponse } from '../../models/response-models/paged-response/paged-response';
 
 @Component({
   selector: 'app-paginator',
   standalone: true,
   imports: [],
-  inputs: [],
   templateUrl: './paginator.component.html',
   styleUrl: './paginator.component.scss'
 })
@@ -56,7 +54,7 @@ export class PaginatorComponent implements OnInit{
   //#region Events
 
   @Output()
-  public onPageChange: EventEmitter<number> = new EventEmitter<number>();
+  public pageChange: EventEmitter<number> = new EventEmitter<number>();
 
   //#region Constructor
 
@@ -76,12 +74,12 @@ export class PaginatorComponent implements OnInit{
 
   public onFirstPage(): void {
     this.currentPage = 1;
-    this.onPageChange.emit(this.currentPage);
+    this.pageChange.emit(this.currentPage);
   }
 
   public onLastPage(): void {
     this.currentPage = this.totalPages;
-    this.onPageChange.emit(this.currentPage);
+    this.pageChange.emit(this.currentPage);
   }
 
   public onNextPage(): void {
@@ -89,7 +87,7 @@ export class PaginatorComponent implements OnInit{
       this.currentPage++;
     }
 
-    this.onPageChange.emit(this.currentPage);
+    this.pageChange.emit(this.currentPage);
   }
 
   public onPreviousPage(): void {
@@ -97,7 +95,7 @@ export class PaginatorComponent implements OnInit{
       this.currentPage--;
     }
 
-    this.onPageChange.emit(this.currentPage);
+    this.pageChange.emit(this.currentPage);
   }
 
   //#endregion Methods

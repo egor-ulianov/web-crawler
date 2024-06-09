@@ -1,0 +1,119 @@
+$primary-color: #007bff;
+$secondary-color: #6c757d;
+$error-color: #dc3545;
+$background-color: #f8f9fa;
+$font-family-base: 'Helvetica Neue', Helvetica, Arial, sans-serif;
+$modal-bg: #ffffff;
+$modal-header-bg: #343a40;
+$modal-header-color: #ffffff;
+$button-bg: #ffffff;
+$button-border: #ced4da;
+$button-color: $secondary-color;
+$button-hover-bg: $primary-color;
+$button-hover-color: #ffffff;
+
+.modal-header {
+  background-color: $modal-header-bg;
+  color: $modal-header-color;
+  padding: 10px 20px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  border-top-left-radius: 5px;
+  border-top-right-radius: 5px;
+}
+
+.modal-title {
+  margin: 0;
+  font-size: 1.5rem;
+}
+
+button.close {
+  background: none;
+  border: none;
+  color: $modal-header-color;
+  font-size: 1.5rem;
+  cursor: pointer;
+
+  &:hover {
+    color: lighten($modal-header-color, 20%);
+  }
+}
+
+.modal-body {
+  background-color: $modal-bg;
+  padding: 20px;
+  border-bottom-left-radius: 5px;
+  border-bottom-right-radius: 5px;
+}
+
+.row {
+  display: flex;
+  flex-wrap: wrap;
+}
+
+.col-12 {
+  flex: 0 0 100%;
+  max-width: 100%;
+}
+
+.form-group {
+  margin: 15px;
+  display: flex;
+  flex-direction: column;
+
+  label {
+    font-weight: bold;
+    margin-bottom: 5px;
+  }
+
+  input[type="text"],
+  input[type="number"],
+  input[type="checkbox"] {
+    padding: 10px;
+    margin-top: 5px;
+    border: 1px solid $secondary-color;
+    border-radius: 4px;
+    font-size: 1rem;
+  }
+
+  small.text-danger {
+    color: $error-color;
+    margin-top: 5px;
+  }
+}
+
+button {
+  background-color: $button-bg;
+  border: 1px solid $button-border;
+  color: $button-color;
+  padding: 10px 20px;
+  font-size: 1rem;
+  border-radius: 4px;
+  cursor: pointer;
+  margin: 5px 10px 5px 0;
+  transition: background-color 0.3s ease, color 0.3s ease;
+
+  &:hover {
+    background-color: $button-hover-bg;
+    color: $button-hover-color;
+  }
+}
+
+a {
+  color: $primary-color;
+  text-decoration: none;
+  transition: color 0.3s ease;
+
+  &:hover {
+    color: darken($primary-color, 10%);
+  }
+}
+
+.d-flex {
+  display: flex;
+}
+
+.flex-column {
+  flex-direction: column;
+}
