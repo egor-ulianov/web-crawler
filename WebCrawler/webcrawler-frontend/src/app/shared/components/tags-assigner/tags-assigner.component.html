@@ -1,5 +1,5 @@
 <div>
-    <input [(ngModel)]="inputValue" (keyup.enter)="addTag()">
+    <input [(ngModel)]="inputValue" (keyup.enter)="addTag()" placeholder="Tags">
     @for(tag of tags; track tag.id) {
         <div>
             {{tag.name}}

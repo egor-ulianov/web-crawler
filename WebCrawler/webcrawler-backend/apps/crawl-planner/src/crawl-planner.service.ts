@@ -41,6 +41,12 @@ export class CrawlPlannerService {
     });
   }
 
+  @Cron(CronExpression.EVERY_MINUTE)
+  public async purgeOutdatedCrawlPlans(): Promise<void> {
+    console.log('Purging outdated crawl plans...');
+    await this.purgeOutdatedCrawlPlansInternal();
+  }
+
   public async getActiveWebsiteRecordsWithExpiredLastExecutionDate(): Promise<
     WebsiteCrawlExecutionPlan[]
   > {
@@ -63,11 +69,23 @@ export class CrawlPlannerService {
     );
   }
 
-  /**
-   * Plan website crawl execution.
-   * 1. Select all active websites with their last execution dates.
-   * 2. Plan the next execution date for each website.
-   */
+
+  public async purgeOutdatedCrawlPlansInternal(purgeThresholdS:number = 3600): Promise<void> {
+    const purgeDate: Date = new Date(new Date().getTime() - purgeThresholdS * 1000);
+    const entities: Array<WebsiteCrawlExecutionPlanEntity> =
+      await this._websiteCrawlExecutionPlanRepository.find({
+        where: {
+          date: LessThan(purgeDate),
+          state: 'Running'
+        },
+      });
+
+    entities.forEach(async (entity) => {
+      entity.state = 'Failed';
+      await this._websiteCrawlExecutionPlanRepository.save(entity);
+    });
+  }
+
   public async planWebsiteCrawlExecution(): Promise<void> {
     const websites: Array<WebsiteCrawlExecutionPlanView> =
       await this._siteViewRepository.find({

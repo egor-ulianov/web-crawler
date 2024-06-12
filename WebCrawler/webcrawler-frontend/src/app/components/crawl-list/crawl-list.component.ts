@@ -58,6 +58,7 @@ export class CrawlListComponent implements OnInit {
 
   public onTagsChanged(event: any): void {
     this.searchParams.tags = (event as Tag[]).map(t => t.name);
+    this.tags = event as Tag[];
     this.performSearch();
   }
 
