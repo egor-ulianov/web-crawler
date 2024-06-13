@@ -1,6 +1,8 @@
 import { ApiProperty } from '@nestjs/swagger';
+import { IsInt, IsPositive, Min } from 'class-validator';
 
 export abstract class PagedRequestBase {
+
   @ApiProperty()
   public pageNumber: number;
 

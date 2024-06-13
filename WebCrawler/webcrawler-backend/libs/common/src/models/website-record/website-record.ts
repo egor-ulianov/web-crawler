@@ -1,24 +1,34 @@
 import { ApiProperty } from '@nestjs/swagger';
 import { WebsiteRecordEntity } from '../../entities/website-record-entity/website-record-entity';
 import { Tag } from '../tag/tag';
+import { IsNotEmpty, IsUrl, MaxLength, Min } from 'class-validator';
 
 export class WebsiteRecord {
   @ApiProperty()
   public id: number;
 
+  @IsNotEmpty()
+  @IsUrl()
+  @MaxLength(255)
   @ApiProperty()
   public url: string;
 
+  @IsNotEmpty()
+  @MaxLength(255)
   @ApiProperty()
   public label: string;
 
   @ApiProperty()
   public isActive: boolean;
 
+  @IsNotEmpty()
+  @MaxLength(255)
   @ApiProperty()
   public boundaryRegExp: string;
 
   @ApiProperty()
+  @IsNotEmpty()
+  @Min(60)
   public periodicity: number;
 
   @ApiProperty()

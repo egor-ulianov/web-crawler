@@ -112,6 +112,16 @@ export class CrawlExecutorService {
     const numProcessors = os.cpus().length;
     console.log(`Number of processors: ${numProcessors}`);
 
+    if (boundaryLinks.length === 0) {
+      console.log('No links to crawl');
+      await this._websiteCrawlExecutionPlanEntityRepository.update(website.id, {
+        state: 'Completed',
+        finishedDate: new Date(),
+        numberOfCrawledPages: 1,
+      });
+      return;
+    }
+
     // Crawl each link that matches the boundary RegExp
     const dividedLinks: string[][] = this.divideLinks(
       boundaryLinks,

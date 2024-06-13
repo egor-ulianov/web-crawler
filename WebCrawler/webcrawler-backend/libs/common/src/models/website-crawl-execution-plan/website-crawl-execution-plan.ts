@@ -1,14 +1,18 @@
 import { WebsiteCrawlExecutionPlanEntity } from '@app/common/entities/website-crawl-execution-plan-entity/website-crawl-execution-plan-entity';
 import { WebsiteRecord } from '../website-record/website-record';
 import { ApiProperty } from '@nestjs/swagger';
+import { IsNotEmpty, IsPositive } from 'class-validator';
 
 export class WebsiteCrawlExecutionPlan {
   @ApiProperty()
   public id: number;
 
+  @IsNotEmpty()
+  @IsPositive()
   @ApiProperty()
   public websiteRecordId: number;
 
+  @IsNotEmpty()
   @ApiProperty()
   public date: Date;
 
