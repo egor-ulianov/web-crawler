@@ -55,7 +55,7 @@ export class CrawlMapComponent implements OnInit {
     this.nodesDataDictionary = new Map<string, CrawlDataNode>();
     this.mapDynamics = MapDynamicEnum.Static;
     this.mapViewType = MapViewEnum.Full;
-    this.graphSize = [window.innerWidth - 100, window.innerHeight - 100];
+    this.graphSize = [window.innerWidth, window.innerHeight - 150];
     console.log(this.graphSize);
    }
 
